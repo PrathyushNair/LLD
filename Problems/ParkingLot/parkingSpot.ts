@@ -4,7 +4,7 @@ export class ParkingSpot{
     parkingSpotId:string
     vehicleType:string
     parkedVehicle:null |{lisenceNumber:string,vehicleType:string}
-    constructor(parkingSpotId:string,vehicleType:VehicleEnum.BIKE|VehicleEnum.CAR|VehicleEnum.TRUCK){
+    constructor(parkingSpotId:string,vehicleType:string){
         this.parkingSpotId=parkingSpotId
         this.vehicleType=vehicleType
         this.parkedVehicle=null
@@ -16,13 +16,13 @@ export class ParkingSpot{
         return this.parkingSpotId
     }
     parkAVehicle(lisenceNumber:string,vehicleType:VehicleEnum.BIKE|VehicleEnum.CAR|VehicleEnum.TRUCK){
-        const isAVehicleParked=this.parkedVehicle ?true:false
         if(this.isParkingAllowed(vehicleType)){
             throw new Error('Vehicle already parked')
         }
         else{
             const vehicle=new VehicleFactory().getVehicle(vehicleType,lisenceNumber)
             this.parkedVehicle= vehicle.getVehicleDetails()
+            return true
         }
     }
     getparkedVehicleDetals(){
