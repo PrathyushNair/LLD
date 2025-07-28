@@ -4,43 +4,43 @@
 //Hence we introduce the concept of product,concrete product, creator and abstract creator.
 
 //Taking an example of the base issue with switch case
-interface NotificationInterface{
-    send():void
+interface NotificationInterface {
+  send(): void;
 }
-class NotificationFactory{
-    constructor(){
+class NotificationFactory {
+  constructor() {}
+  createNotificationObject(notificationType: string) {
+    switch (notificationType) {
+      case "Email":
+        return new EmailNotification();
+      case "Push":
+        return new PushNotification();
+      case "InApp":
+        return new InAppNotification();
     }
-    createNotificationObject(notificationType:string){
-        switch(notificationType){
-            case 'Email':
-                return new EmailNotification()
-            case 'Push':
-                return new PushNotification()
-            case 'InApp':
-                return new InAppNotification()
-        }
-    }
+  }
 }
 
-class EmailNotification implements NotificationInterface{
-    constructor(){}
-    send(){
-        console.log('Sending Email Notification')
-    }
+class EmailNotification implements NotificationInterface {
+  constructor() {}
+  send() {
+    console.log("Sending Email Notification");
+  }
 }
-class PushNotification implements NotificationInterface{
-    constructor(){}
-    send(){
-        console.log('Sending Push Notification')
-    }
+class PushNotification implements NotificationInterface {
+  constructor() {}
+  send() {
+    console.log("Sending Push Notification");
+  }
 }
-class InAppNotification implements NotificationInterface{
-    constructor(){}
-    send(){
-        console.log('Sending InApp Notification')
-    }
+class InAppNotification implements NotificationInterface {
+  constructor() {}
+  send() {
+    console.log("Sending InApp Notification");
+  }
 }
 
 //Say tomorrow if we want to add whats app and slack then this bloats. Because we will have to add additional cases in switch.
 // This violates the open for extension closed for modification principle.
 // Hence we will go with a new approach in advNotificationApproach.ts
+//You may also use the registery pattern(registery.ts) to save yourself from the switch based approach
